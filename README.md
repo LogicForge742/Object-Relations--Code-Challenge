@@ -1,35 +1,35 @@
-# 📰 Magazine Object-Relations Code Challenge
+#  Magazine Object-Relations Code Challenge
 
 This project implements a lightweight **Object-Relational Mapping (ORM)-like system** in Python — built **without using any external ORM library** such as SQLAlchemy.  
 It models relationships between **Authors**, **Magazines**, and **Articles** using **pure SQL** and **object-oriented programming principles**.
 
 ---
 
-## 🚀 Features
+##  Features
 
-✅ **Three Core Models**
+ **Three Core Models**
 - `Author`, `Magazine`, and `Article` — each with strict data validation.  
 - Implements one-to-many and many-to-many relationships using SQL joins.
 
-✅ **SQLite Database**
+ **SQLite Database**
 - Lightweight local database.  
 - Tables are automatically created when the app runs.
 
-✅ **Relationships**
+ **Relationships**
 - Easily fetch related data, e.g.:
   - `author.articles()` → all articles by an author  
   - `magazine.contributors()` → all authors who wrote for a magazine  
   - `author.magazines()` → all magazines an author has written for  
 
-✅ **Testing**
+ **Testing**
 - Fully tested with `pytest` for reliability and correctness.  
 
-✅ **No ORM**
+**No ORM**
 - Pure SQL queries for educational transparency and hands-on learning.
 
 ---
 
-## 🧩 Project Structure
+##  Project Structure
 
 Object-Relations/
 │
@@ -47,7 +47,7 @@ Object-Relations/
 
 ---
 
-## ⚙️ Getting Started
+##  Getting Started
 
 ### 1. Clone the Repository
 
