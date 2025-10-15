@@ -4,9 +4,7 @@ from pytest_mock import MockerFixture
 from lib.author import Author
 from lib.database_utils import get_connection
 
-# ---------------------------------------------------
 # Setup: create and reset tables before each test
-# ---------------------------------------------------
 @pytest.fixture(autouse=True)
 def setup_db():
     conn = get_connection()
@@ -46,9 +44,7 @@ def setup_db():
     if "pytest" not in __import__("sys").modules:
         conn.close()
 
-# ---------------------------------------------------
-# Test: Saving a new author inserts and find_by_id retrieves it
-# ---------------------------------------------------
+# Test: Saving a new author inserts and find_by_id retrieves i
 def test_save_inserts_and_find_by_id_retrieves():
     author = Author(name="Alice", email="alice@example.com")
     author.save()
@@ -69,9 +65,7 @@ def test_save_inserts_and_find_by_id_retrieves():
     assert fetched.name == "Alice"
     assert fetched.email == "alice@example.com"
 
-# ---------------------------------------------------
 # Test: Updating existing author modifies fields without changing id
-# ---------------------------------------------------
 def test_save_updates_existing_author_without_changing_id():
     original = Author(name="Bob", email="old@example.com")
     original.save()
@@ -93,9 +87,8 @@ def test_save_updates_existing_author_without_changing_id():
     assert row["name"] == "Robert"
     assert row["email"] == "new@example.com"
 
-# ---------------------------------------------------
 # Test: add_article persists and links to author and magazine, and articles() reflects it
-# ---------------------------------------------------
+
 def test_add_article_persists_and_links_to_author_and_magazine(mocker: MockerFixture):
     # Prepare author
     author = Author(name="Writer", email="writer@example.com")
@@ -158,26 +151,23 @@ def test_add_article_persists_and_links_to_author_and_magazine(mocker: MockerFix
     assert authored_articles[0].title == "Hello World"
     assert authored_articles[0].id == created_article.id
 
-# ---------------------------------------------------
 # Test: Invalid initialization names raise ValueError
-# ---------------------------------------------------
+
 def test_init_raises_value_error_for_invalid_name():
     with pytest.raises(ValueError):
         Author(name=123, email="x@example.com")
     with pytest.raises(ValueError):
         Author(name="   ", email="x@example.com")
 
-# ---------------------------------------------------
 # Test: name is read-only after initialization
-# ---------------------------------------------------
+
 def test_name_property_is_read_only():
     author = Author(name="Immutable", email="i@example.com")
     with pytest.raises(AttributeError):
         author.name = "Changed"
 
-# ---------------------------------------------------
 # Test: add_article raises TypeError for non-Magazine parameter
-# ---------------------------------------------------
+
 def test_add_article_raises_type_error_for_non_magazine():
     author = Author(name="TypeSafe", email="t@example.com")
     author.save()

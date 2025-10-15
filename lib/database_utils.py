@@ -99,4 +99,4 @@ def create_tables(conn):
     """)
 
     conn.commit()
-    print("✅ Tables ensured in database.")
+    print("Tables ensured in database.")

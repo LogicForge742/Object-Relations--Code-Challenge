@@ -19,9 +19,8 @@ class Article:
         self.author = author           # Must be an Author object
         self.magazine = magazine       # Must be a Magazine object
 
-    # =====================================================
+    
     #  PROPERTY: title (READ-ONLY)
-    # =====================================================
 
     @property
     def title(self):
@@ -41,9 +40,9 @@ class Article:
             raise ValueError("Article title cannot be empty.")
         self._title = value.strip()
 
-    # =====================================================
+    
     #  RELATIONSHIP PROPERTIES (author, magazine)
-    # =====================================================
+    
 
     @property
     def author(self):
@@ -78,9 +77,8 @@ class Article:
                 raise TypeError("magazine must be a Magazine instance.")
         self._magazine = value
 
-    # =====================================================
     #  CLASS METHODS — Create or find records
-    # =====================================================
+   
 
     @classmethod
     def new_from_db(cls, row):
@@ -113,9 +111,9 @@ class Article:
 
         return cls.new_from_db(row) if row else None
 
-    # =====================================================
+   
     #  SAVE (INSERT / UPDATE)
-    # =====================================================
+ 
 
     def save(self):
         """
@@ -151,3 +149,5 @@ class Article:
 
         conn.commit()
         conn.close()
+    if __name__ == "__main__":
+        print("article.py is running successfully!")

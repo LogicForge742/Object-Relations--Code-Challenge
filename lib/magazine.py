@@ -1,6 +1,6 @@
-# ============================================================
+
 #  MAGAZINE MODEL (lib/magazine.py)
-# ============================================================
+
 # Represents a magazine that contains multiple articles.
 # Handles:
 # - Validated read/write properties (name, category)
@@ -9,7 +9,7 @@
 # - Utility and aggregate methods
 #
 # Uses direct SQLite access (via `get_connection`) — no ORM.
-# ============================================================
+
 
 import sys
 from .database_utils import get_connection
@@ -33,9 +33,9 @@ class Magazine:
         self.name = name
         self.category = category
 
-    # ============================================================
+   
     #  PROPERTIES (Validation Logic)
-    # ============================================================
+    
 
     # --- name property ---
     @property
@@ -67,9 +67,9 @@ class Magazine:
             raise ValueError("Magazine category cannot be empty.")
         self._category = value.strip()
 
-    # ============================================================
+   
     #  CLASS METHODS (Helpers for DB interaction)
-    # ============================================================
+   
     @classmethod
     def new_from_db(cls, row):
         """
@@ -103,9 +103,7 @@ class Magazine:
 
         return cls.new_from_db(row) if row else None
 
-    # ============================================================
     #  SAVE (INSERT / UPDATE)
-    # ============================================================
     def save(self):
         """
         Insert a new record or update an existing one in the `magazines` table.
@@ -134,9 +132,8 @@ class Magazine:
         if "pytest" not in sys.modules:
             conn.close()
 
-    # ============================================================
     #  RELATIONSHIP METHODS
-    # ============================================================
+  
     def articles(self):
         """
         Retrieve all Article instances that belong to this magazine.
@@ -173,9 +170,8 @@ class Magazine:
         from .author import Author
         return [Author.new_from_db(row) for row in rows]
 
-    # ============================================================
     #  EXTRA METHODS (Convenience / Aggregations)
-    # ============================================================
+   
     def article_titles(self):
         """
         Return a list of all article titles published in this magazine.
@@ -209,9 +205,8 @@ class Magazine:
         from .author import Author
         return [Author.find_by_id(aid) for aid in author_ids]
 
-    # ============================================================
     #  BONUS: TOP PUBLISHER (Aggregate Method)
-    # ============================================================
+   
     @classmethod
     def top_publisher(cls):
         """

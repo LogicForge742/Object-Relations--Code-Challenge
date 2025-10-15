@@ -1,13 +1,13 @@
-# ================================================
+
 #  AUTHOR MODEL
-# ================================================
+
 # Represents an author who writes articles for magazines.
 # Implements:
 # - Read-only validated `name` property
 # - Database persistence (INSERT / UPDATE)
 # - Relationship methods to retrieve related records
 # Uses direct SQL (no ORM).
-# ================================================
+
 
 from .database_utils import get_connection
 
@@ -33,17 +33,17 @@ class Author:
                 raise ValueError("Author name cannot be empty.")
             self._name = name
 
-    # =====================================================
+   
     #  PROPERTIES
-    # =====================================================
+ 
     @property
     def name(self):
         """Read-only property for the author's validated name."""
         return self._name
 
-    # =====================================================
+   
     # CLASS METHODS (DB HELPERS)
-    # =====================================================
+   
     @classmethod
     def new_from_db(cls, row):
         """
@@ -66,9 +66,9 @@ class Author:
         #  Do NOT close the shared connection (used in tests)
         return cls.new_from_db(row) if row else None
 
-    # =====================================================
+
     #  SAVE METHOD (INSERT / UPDATE)
-    # =====================================================
+  
     def save(self):
         """
         Save the Author record in the database.
@@ -95,9 +95,9 @@ class Author:
         conn.commit()
         # Do NOT close — keep the shared in-memory DB alive.
 
-    # =====================================================
+    
     #  RELATIONSHIP METHODS
-    # =====================================================
+  
     def articles(self):
         """
         Return all articles written by this author.
@@ -131,9 +131,8 @@ class Author:
         from .magazine import Magazine
         return [Magazine.new_from_db(row) for row in rows]
 
-    # =====================================================
     #  EXTRA METHODS
-    # =====================================================
+  
     def add_article(self, magazine, title):
         """
         Create and save a new Article written by this author for a given magazine.
